@@ -5,10 +5,6 @@
 </div>
 
 <p align="center">
-  <i>Created with 💖 by <b>RAO-ABBAS</b></i>
-</p>
-
-<p align="center">
   <img src="abbas/line.svg" width="70%" height="2" />
 </p>
 
@@ -68,5 +64,5 @@
 </p>
 
 <p align="center">
-  🎀 <i>Made with</i> ❤ <i>by</i> <b>RAO ABBAS</b> 🎀
+  🎀 <i>Made with</i> 💖 <i>by</i> <b>RAO ABBAS</b> 🎀
 </p>
