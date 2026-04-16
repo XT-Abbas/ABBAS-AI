@@ -1,0 +1,8 @@
+{
+  "messages": [
+    "I'm sorry, calls are currently disabled for this number. Please send a text message.",
+    "This number is unable to receive voice or video calls. Your call has been rejected automatically.",
+    "Call detected and rejected. Voice/Video calling is not allowed here.",
+    "This number only accepts chat messages. Your call was cut by the Anti-Call system."
+  ]
+}

@@ -1,0 +1,272 @@
+const os = require('os');
+const fs = require('fs');
+const path = require('path');
+
+const runtime = (seconds) => {
+    seconds = Number(seconds);
+    const d = Math.floor(seconds / (3600 * 24));
+    const h = Math.floor((seconds % (3600 * 24)) / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    return `${d}d ${h}h ${m}m ${s}s`;
+};
+
+module.exports = {
+    command: ['menu2'],
+    description: 'Displays the command menu',
+    category: 'main',
+    execute: async (sock, m, { prefix, config }) => { 
+        
+        const uptime = runtime(process.uptime());
+        
+        const totalMemBytes = os.totalmem();
+        const freeMemBytes = os.freemem();
+        const usedMemBytes = totalMemBytes - freeMemBytes;
+
+        const totalMem = (totalMemBytes / 1024 / 1024 / 1024).toFixed(2);
+        const freeMem = (freeMemBytes / 1024 / 1024 / 1024).toFixed(2);
+        
+        const percentage = Math.round((usedMemBytes / totalMemBytes) * 100);
+        const length = 10;
+        const phases = ["░", "▏", "▎", "▍", "▌", "▋", "▊", "▉", "█"];
+        
+        const fullBlocks = Math.floor((percentage / 100) * length);
+        const remainder = ((percentage / 100) * length) % 1;
+        const phaseIndex = Math.floor(remainder * 8);
+        
+        let ramBar = "";
+        for (let i = 0; i < fullBlocks; i++) {
+            ramBar += "█";
+        }
+        if (fullBlocks < length) {
+            ramBar += phases[phaseIndex];
+        }
+        for (let i = fullBlocks + 1; i < length; i++) {
+            ramBar += "░";
+        }
+        
+        const mode = (config.status.worktype || (config.status.public ? 'public' : 'private')).toUpperCase();
+
+        const verifiedReply = {
+            key: {
+                participant: `0@s.whatsapp.net`, 
+                fromMe: false,
+                remoteJid: "status@broadcast"
+            },
+            message: {
+                extendedTextMessage: {
+                    text: config.settings.title, 
+                    contextInfo: {
+                        mentionedJid: [m.sender],
+                        verifiedBizName: config.settings.title 
+                    }
+                }
+            }
+        };
+
+        const headerTop = `╭━━〔 *${config.settings.title}* 〕━┈\n┃ 👑 *Dev:* ${config.settings.author}\n┃ ⚡ *Prefix:* [ ${prefix} ]\n┃ ⚙️ *Mode:* ${mode}\n┃ ⏳ *Uptime:* ${uptime}\n┃ 💻 *Ram:* ${freeMem}GB / ${totalMem}GB\n┃ ${ramBar} *${percentage}%*\n╰━━━━━━━━━━━┈`;
+
+const customMenu = `
+╭━「 🤖 𝗔𝗜 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}gemini
+┃ ➪ ${prefix}powerbrain
+╰━━━━━━━━━━━
+
+╭━「 ⚡ 𝗔𝗡𝗧𝗜 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}anticall
+┃ ➪ ${prefix}antiedit
+┃ ➪ ${prefix}antidelete
+┃ ➪ ${prefix}antipdf
+┃ ➪ ${prefix}antifile
+┃ ➪ ${prefix}antiapk
+┃ ➪ ${prefix}antivoice
+┃ ➪ ${prefix}antiphoto
+┃ ➪ ${prefix}antidocument
+╰━━━━━━━━━━━
+
+╭━「 🔎 𝗦𝗘𝗔𝗥𝗖𝗛 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}image
+┃ ➪ ${prefix}github
+┃ ➪ ${prefix}text2img
+┃ ➪ ${prefix}wallpaper
+┃ ➪ ${prefix}pinsearch
+┃ ➪ ${prefix}tiktoksearch
+╰━━━━━━━━━━━
+
+╭━「 🌀 𝗢𝗧𝗛𝗘𝗥 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}cid
+┃ ➪ ${prefix}emix
+┃ ➪ ${prefix}sticker
+┃ ➪ ${prefix}take
+┃ ➪ ${prefix}useprefix
+┃ ➪ ${prefix}noprefix
+┃ ➪ ${prefix}setprefix
+╰━━━━━━━━━━━
+
+╭━「 📌 𝗠𝗔𝗜𝗡 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}pp
+┃ ➪ ${prefix}vv
+┃ ➪ ${prefix}vv2
+┃ ➪ ${prefix}menu
+┃ ➪ ${prefix}menu2
+┃ ➪ ${prefix}ping
+┃ ➪ ${prefix}alive
+┃ ➪ ${prefix}uptime
+┃ ➪ ${prefix}restart
+┃ ➪ ${prefix}creator
+┃ ➪ ${prefix}totalfeature
+╰━━━━━━━━━━━
+
+╭━「 👑 𝗢𝗪𝗡𝗘𝗥 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}vv
+┃ ➪ ${prefix}vv2
+┃ ➪ ${prefix}mode
+┃ ➪ ${prefix}setpp
+┃ ➪ ${prefix}restart/reload
+┃ ➪ ${prefix}cleanup
+┃ ➪ ${prefix}setprefix
+┃ ➪ ${prefix}listplugin
+┃ ➪ ${prefix}addowner
+┃ ➪ ${prefix}delowner
+┃ ➪ ${prefix}listowner
+┃ ➪ ${prefix}totalgroup
+╰━━━━━━━━━━━
+
+╭━「 🔐 𝗣𝗥𝗜𝗩𝗔𝗧𝗘 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}addfile
+┃ ➪ ${prefix}delfile
+┃ ➪ ${prefix}getfile
+┃ ➪ ${prefix}reboot
+┃ ➪ ${prefix}delplugin
+┃ ➪ ${prefix}getplugin
+┃ ➪ ${prefix}addplugin
+┃ ➪ ${prefix}updatefile
+╰━━━━━━━━━━━
+
+╭━「 🚫 𝗪𝗔𝗥𝗡 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}antilink
+┃ ➪ ${prefix}warn
+┃ ➪ ${prefix}warnon
+┃ ➪ ${prefix}warnoff
+┃ ➪ ${prefix}warnings
+┃ ➪ ${prefix}resetwarn
+┃ ➪ ${prefix}antilink on/off
+┃ ➪ ${prefix}antibadword on/off
+╰━━━━━━━━━━━
+
+╭━「 📥 𝗗𝗟 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}mp3
+┃ ➪ ${prefix}mp4
+┃ ➪ ${prefix}ytmp3
+┃ ➪ ${prefix}ytmp4
+┃ ➪ ${prefix}tiktok
+┃ ➪ ${prefix}tiktok2
+┃ ➪ ${prefix}audio2
+┃ ➪ ${prefix}capcut
+┃ ➪ ${prefix}youtube
+┃ ➪ ${prefix}gitclone
+┃ ➪ ${prefix}mediafire
+┃ ➪ ${prefix}mediafire2
+┃ ➪ ${prefix}thumbnail
+┃ ➪ ${prefix}instagram
+╰━━━━━━━━━━━
+
+╭━「 🧰 𝗧𝗢𝗢𝗟𝗦 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}pp
+┃ ➪ ${prefix}qr
+┃ ➪ ${prefix}url
+┃ ➪ ${prefix}tts
+┃ ➪ ${prefix}tts2
+┃ ➪ ${prefix}vurl
+┃ ➪ ${prefix}tourl
+┃ ➪ ${prefix}remini
+┃ ➪ ${prefix}sketch
+┃ ➪ ${prefix}tinyurl
+┃ ➪ ${prefix}cleanuri
+┃ ➪ ${prefix}rebrandly
+┃ ➪ ${prefix}device
+┃ ➪ ${prefix}tomp3
+┃ ➪ ${prefix}barcode
+┃ ➪ ${prefix}translate
+╰━━━━━━━━━━━
+
+╭━「 ⚙️ 𝗔𝗨𝗧𝗢 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}autoreact
+┃ ➪ ${prefix}autoposton
+┃ ➪ ${prefix}autopostoff
+┃ ➪ ${prefix}setposttime
+┃ ➪ ${prefix}autotyping
+┃ ➪ ${prefix}autorecording
+┃ ➪ ${prefix}autoreactinbox
+┃ ➪ ${prefix}autoreactgroup
+┃ ➪ ${prefix}readmessagedm
+┃ ➪ ${prefix}readmessagegroup
+┃ ➪ ${prefix}autotypinginbox
+┃ ➪ ${prefix}autotypinggroup
+┃ ➪ ${prefix}autostatusview
+┃ ➪ ${prefix}autostatusreact
+┃ ➪ ${prefix}autorecordinginbox
+┃ ➪ ${prefix}autorecordinggroup
+╰━━━━━━━━━━━
+
+╭━「 🎭 𝗙𝗨𝗡 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}metallic
+┃ ➪ ${prefix}ice
+┃ ➪ ${prefix}snow
+┃ ➪ ${prefix}impressive
+┃ ➪ ${prefix}matrix
+┃ ➪ ${prefix}light
+┃ ➪ ${prefix}neon
+┃ ➪ ${prefix}devil
+┃ ➪ ${prefix}purple
+┃ ➪ ${prefix}thunder
+┃ ➪ ${prefix}leaves
+┃ ➪ ${prefix}1917
+┃ ➪ ${prefix}arena
+┃ ➪ ${prefix}hacker
+┃ ➪ ${prefix}sand
+┃ ➪ ${prefix}blackpink
+┃ ➪ ${prefix}glitch
+┃ ➪ ${prefix}fire
+╰━━━━━━━━━━━
+
+╭━「 👥 𝗚𝗥𝗢𝗨𝗣 𝗠𝗘𝗡𝗨 」
+┃ ➪ ${prefix}tag
+┃ ➪ ${prefix}gpp
+┃ ➪ ${prefix}link
+┃ ➪ ${prefix}add
+┃ ➪ ${prefix}left
+┃ ➪ ${prefix}kick
+┃ ➪ ${prefix}open
+┃ ➪ ${prefix}close
+┃ ➪ ${prefix}invite
+┃ ➪ ${prefix}purge
+┃ ➪ ${prefix}tagall
+┃ ➪ ${prefix}kickall
+┃ ➪ ${prefix}revoke
+┃ ➪ ${prefix}hidetag
+┃ ➪ ${prefix}demote
+┃ ➪ ${prefix}promote
+┃ ➪ ${prefix}tagadmin
+┃ ➪ ${prefix}groupinfo
+┃ ➪ ${prefix}creatnewgc
+╰━━━━━━━━━━━`;
+
+
+        const footer = `\n*${config.settings.footer}*`;
+        const finalMessage = headerTop + "\n" + customMenu + footer;
+
+        if (fs.existsSync('./thumbnail/image.jpg')) {
+            await sock.sendMessage(m.chat, {
+                image: fs.readFileSync('./thumbnail/image.jpg'),
+                caption: finalMessage,
+                contextInfo: { mentionedJid: [m.sender], isForwarded: true, forwardingScore: 999 }
+            }, { quoted: verifiedReply }); 
+        } else {
+            await sock.sendMessage(m.chat, {
+                text: finalMessage,
+                contextInfo: { mentionedJid: [m.sender], isForwarded: true, forwardingScore: 999 }
+            }, { quoted: verifiedReply }); 
+        }
+    }
+};

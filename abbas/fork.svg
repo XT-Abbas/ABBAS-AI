@@ -1,0 +1,6 @@
+<svg width="180" height="50" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="50" rx="12" fill="#111"/>
+  <text x="50%" y="50%" fill="#00f0ff" font-size="16" text-anchor="middle" alignment-baseline="middle">
+    🍴 Fork Repo
+  </text>
+</svg>

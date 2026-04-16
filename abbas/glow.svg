@@ -1,0 +1,11 @@
+<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+  <circle cx="150" cy="50" r="40" fill="url(#g)">
+    <animate attributeName="r" values="30;50;30" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>
