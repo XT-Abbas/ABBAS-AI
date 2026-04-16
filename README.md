@@ -1,12 +1,8 @@
-<p align="center">
-  <img src="abbas/line.svg" width="100%" height="3" />
-</p>
-
-<p align="center">
-  <img src="abbas/glow.svg" width="60" />
-</p>
-
-<h1 align="center">✨ Welcome to ABBAS-AI ✨</h1>
+<div align="center"> 
+  <a href="https://git.io/typing-svg"> 
+    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=00FFA3&center=true&width=930&height=120&lines=ABBAS+AI+BOT;Multi-Device+Whatsapp+Bot;Coded+By+ABBAS" alt="Typing SVG" />
+  </a> 
+</div>
 
 <p align="center">
   <i>Created with 💖 by <b>RAO-ABBAS</b></i>
