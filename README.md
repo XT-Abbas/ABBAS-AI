@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="abbas/line.svg" width="100%" />
+  <img src="abbas/line.svg" width="100%" height="3" />
+</p>
+
+<p align="center">
+  <img src="abbas/glow.svg" width="60" />
 </p>
 
 <h1 align="center">✨ Welcome to ABBAS-AI ✨</h1>
@@ -9,11 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="abbas/glow.svg" width="100px" />
-</p>
-
-<p align="center">
-  <img src="abbas/line.svg" width="70%" />
+  <img src="abbas/line.svg" width="70%" height="2" />
 </p>
 
 ## 🚀 About ABBAS-AI
@@ -22,21 +22,25 @@
 💡 Designed with extreme style, cute UI, and unbeatable performance.  
 🔥 Built exclusively by **XT-Abbas**.
 
----
+<p align="center">
+  <img src="abbas/line.svg" width="40%" height="1" />
+</p>
 
 ## ⚡ Quick Actions
 
 <p align="center">
   <a href="https://github.com/XT-Abbas/ABBAS-AI/fork">
-    <img src="abbas/fork.svg" width="140px"/>
+    <img src="abbas/fork.svg" width="140"/>
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://github.com/XT-Abbas/ABBAS-AI/archive/refs/heads/main.zip">
-    <img src="abbas/download.svg" width="150px"/>
+    <img src="abbas/download.svg" width="150"/>
   </a>
 </p>
 
----
+<p align="center">
+  <img src="abbas/line.svg" width="40%" height="1" />
+</p>
 
 ## ⚙️ How to Modify
 
@@ -50,7 +54,9 @@
 
 > 💡 **Pro Note:** > Do not rename files inside the `thumbnails` folder. Only edit `config.js` for main customization. Now your bot is fully customized with your VIP identity 👑
 
----
+<p align="center">
+  <img src="abbas/line.svg" width="100%" height="3" />
+</p>
 
 ## 🌟 VIP Features & Menus
 
@@ -62,7 +68,7 @@
 | 💎 **Tool Menu** | 💎 **Warn Menu** | 💎 **List Menu** |
 
 <p align="center">
-  <img src="abbas/line.svg" width="100%" />
+  <img src="abbas/line.svg" width="100%" height="3" />
 </p>
 
 <p align="center">
