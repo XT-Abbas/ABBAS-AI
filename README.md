@@ -39,6 +39,29 @@
 
 </p>
 
+
+## ⚙️ HOW TO MODIFY
+
+💎 Want to create your own bot? Follow these simple steps:
+
+✨ 1. Open `config.js`  
+➡ Change your name, number, and settings as you want  
+
+✨ 2. Go to `thumbnails/` folder  
+➡ Replace images with your own  
+⚠ Keep the **same file names** (important)
+
+✨ 3. Save everything and run the bot 🚀  
+
+---
+
+💡 Note:
+- Do not rename files inside thumbnails folder  
+- Only edit config.js for main customization  
+
+---
+
+💎 Now your bot is fully customized with your identity 👑
 ---
 
 ## 🌟 VIP FEATURES & MENUS
